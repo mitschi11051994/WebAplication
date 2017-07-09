@@ -1,0 +1,121 @@
+﻿@model WebApplication1.Models.tblReunion
+
+@{
+    ViewBag.Title = "Create";
+}
+
+
+
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>ADMINISTRADOR</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        .titulo {
+            color: midnightblue;
+            font-family: 'Bookman Old Style';
+            font-size: 35px;
+            margin-left: 220PX;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 420px;
+            height: auto;
+        }
+    </style>
+
+</head>
+<body>
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        <h2 class="titulo">BIENVENIDO USUARIO: @(User.Identity.IsAuthenticated ? HttpContext.Current.User.Identity.Name : "Guest") </h2>
+        <a href="@Url.Action("SignOut","Home")">Logout</a>
+    }
+
+    <div class="container">
+
+        <div class="row">
+            <div class="panel panel-success" style="width:80em; height: 34.5em; margin-left: -0.1em; padding: 1em; padding-top: -1EM;  margin-top: 1em; ">
+
+                <div class="panel-body" style="width: 50em; margin-left: 0em; margin-top: 0em;  padding: 5px 10px;">
+
+                    <div>
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <div class="form-horizontal">
+
+                                @Html.ValidationSummary(true)
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.title, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.title)
+                                        @Html.ValidationMessageFor(model => model.title)
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.fecha_y_hora, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.fecha_y_hora)
+                                        @Html.ValidationMessageFor(model => model.fecha_y_hora)
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.id_user, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    @Html.DropDownListFor(m => m.id_user, (SelectList)ViewBag.TipoUsuario, "Seleccione el Usuario")
+                                    <div class="col-md-10">
+                                        @Html.ValidationMessageFor(model => model.id_user)
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.esVirtual, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    @Html.CheckBoxFor(model => model.esVirtual)
+                                    <div class="col-md-10">
+                                        @Html.ValidationMessageFor(model => model.esVirtual)
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.id_client, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    @Html.DropDownListFor(m => m.id_client, (SelectList)ViewBag.TipoCliente, "Seleccione el Cliente")
+                                    <div class="col-md-10">
+                                        @Html.ValidationMessageFor(model => model.id_client)
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-10">
+                                        <input type="submit" value="Create" class="btn btn-default" />
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                        <div>
+                            @Html.ActionLink("Back to List", "Index")
+                        </div>
+                        @section Scripts {
+                            @Scripts.Render("~/bundles/jqueryval")
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+
+

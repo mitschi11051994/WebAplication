@@ -1,0 +1,110 @@
+﻿@model WebApplication1.Models.tblReunion
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>ADMINISTRADOR</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        .titulo {
+            color: midnightblue;
+            font-family: 'Bookman Old Style';
+            font-size: 35px;
+            margin-left: 220PX;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 420px;
+            height: auto;
+        }
+    </style>
+
+</head>
+<body>
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        <h2 class="titulo">BIENVENIDO USUARIO: @(User.Identity.IsAuthenticated ? HttpContext.Current.User.Identity.Name : "Guest") </h2>
+        <a href="@Url.Action("SignOut","Home")">Logout</a>
+    }
+
+    <div class="container">
+
+        <div class="row">
+            <div class="panel panel-success" style="width:80em; height: 34.5em; margin-left: -0.1em; padding: 1em; padding-top: -1EM;  margin-top: 1em; ">
+
+                <div class="panel-body" style="width: 50em; margin-left: 0em; margin-top: 0em;  padding: 5px 10px;">
+
+                    <div>
+
+                        <div>
+                            <dl class="dl-horizontal">
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.title)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.title)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.fecha_y_hora)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.fecha_y_hora)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.id_user)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.id_user)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.esVirtual)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.esVirtual)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.id_client)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.id_client)
+                                </dd>
+
+                            </dl>
+                        </div>
+                        <p>
+                            @Html.ActionLink("Edit", "Edit", new { id = Model.id_reunion }) |
+                            @Html.ActionLink("Back to List", "Index")
+                        </p>
+
+                        @section Scripts {
+                            @Scripts.Render("~/bundles/jqueryval")
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+
