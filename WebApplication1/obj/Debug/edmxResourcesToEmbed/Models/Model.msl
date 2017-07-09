@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CMDModelStoreContainer" CdmEntityContainer="CMDEntities">
+    <EntitySetMapping Name="tblClient">
+      <EntityTypeMapping TypeName="CMDModel.tblClient">
+        <MappingFragment StoreEntitySet="tblClient">
+          <ScalarProperty Name="id_client" ColumnName="id_client" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="web_page" ColumnName="web_page" />
+          <ScalarProperty Name="direccion" ColumnName="direccion" />
+          <ScalarProperty Name="tel" ColumnName="tel" />
+          <ScalarProperty Name="puesto" ColumnName="puesto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblContact">
+      <EntityTypeMapping TypeName="CMDModel.tblContact">
+        <MappingFragment StoreEntitySet="tblContact">
+          <ScalarProperty Name="id_contact" ColumnName="id_contact" />
+          <ScalarProperty Name="id_client" ColumnName="id_client" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="first_name" ColumnName="first_name" />
+          <ScalarProperty Name="web_address" ColumnName="web_address" />
+          <ScalarProperty Name="tel" ColumnName="tel" />
+          <ScalarProperty Name="puesto" ColumnName="puesto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblReunion">
+      <EntityTypeMapping TypeName="CMDModel.tblReunion">
+        <MappingFragment StoreEntitySet="tblReunion">
+          <ScalarProperty Name="id_reunion" ColumnName="id_reunion" />
+          <ScalarProperty Name="fecha_y_hora" ColumnName="fecha_y_hora" />
+          <ScalarProperty Name="id_user" ColumnName="id_user" />
+          <ScalarProperty Name="esVirtual" ColumnName="esVirtual" />
+          <ScalarProperty Name="id_client" ColumnName="id_client" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblSupport_Tickets">
+      <EntityTypeMapping TypeName="CMDModel.tblSupport_Tickets">
+        <MappingFragment StoreEntitySet="tblSupport_Tickets">
+          <ScalarProperty Name="id_Support_Tickets" ColumnName="id_Support_Tickets" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="detalle" ColumnName="detalle" />
+          <ScalarProperty Name="id_user" ColumnName="id_user" />
+          <ScalarProperty Name="id_client" ColumnName="id_client" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblUser">
+      <EntityTypeMapping TypeName="CMDModel.tblUser">
+        <MappingFragment StoreEntitySet="tblUser">
+          <ScalarProperty Name="id_user" ColumnName="id_user" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Role" ColumnName="Role" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

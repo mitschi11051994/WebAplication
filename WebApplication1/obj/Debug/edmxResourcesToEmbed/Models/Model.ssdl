@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CMDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tblClient">
+    <Key>
+      <PropertyRef Name="id_client" />
+    </Key>
+    <Property Name="id_client" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" />
+    <Property Name="web_page" Type="varchar" MaxLength="50" />
+    <Property Name="direccion" Type="varchar" MaxLength="50" />
+    <Property Name="tel" Type="varchar" MaxLength="50" />
+    <Property Name="puesto" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tblContact">
+    <Key>
+      <PropertyRef Name="id_contact" />
+    </Key>
+    <Property Name="id_contact" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="id_client" Type="varchar" MaxLength="50" />
+    <Property Name="name" Type="varchar" MaxLength="50" />
+    <Property Name="first_name" Type="varchar" MaxLength="50" />
+    <Property Name="web_address" Type="varchar" MaxLength="50" />
+    <Property Name="tel" Type="varchar" MaxLength="50" />
+    <Property Name="puesto" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tblReunion">
+    <Key>
+      <PropertyRef Name="id_reunion" />
+    </Key>
+    <Property Name="id_reunion" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="fecha_y_hora" Type="datetime" />
+    <Property Name="id_user" Type="smallint" />
+    <Property Name="esVirtual" Type="bit" />
+    <Property Name="id_client" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tblSupport_Tickets">
+    <Key>
+      <PropertyRef Name="id_Support_Tickets" />
+    </Key>
+    <Property Name="id_Support_Tickets" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="title" Type="varchar" MaxLength="50" />
+    <Property Name="detalle" Type="varchar" MaxLength="50" />
+    <Property Name="id_user" Type="smallint" />
+    <Property Name="id_client" Type="varchar" MaxLength="50" />
+    <Property Name="estado" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tblUser">
+    <Key>
+      <PropertyRef Name="id_user" />
+    </Key>
+    <Property Name="id_user" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Username" Type="varchar" MaxLength="255" />
+    <Property Name="Password" Type="varchar" MaxLength="255" />
+    <Property Name="Role" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <Association Name="FK_Contact_Client">
+    <End Role="tblClient" Type="Self.tblClient" Multiplicity="0..1" />
+    <End Role="tblContact" Type="Self.tblContact" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblClient">
+        <PropertyRef Name="id_client" />
+      </Principal>
+      <Dependent Role="tblContact">
+        <PropertyRef Name="id_client" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Reunion_Client">
+    <End Role="tblClient" Type="Self.tblClient" Multiplicity="0..1" />
+    <End Role="tblReunion" Type="Self.tblReunion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblClient">
+        <PropertyRef Name="id_client" />
+      </Principal>
+      <Dependent Role="tblReunion">
+        <PropertyRef Name="id_client" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Reunion_Reunion">
+    <End Role="tblReunion" Type="Self.tblReunion" Multiplicity="1" />
+    <End Role="tblReunion1" Type="Self.tblReunion" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="tblReunion">
+        <PropertyRef Name="id_reunion" />
+      </Principal>
+      <Dependent Role="tblReunion1">
+        <PropertyRef Name="id_reunion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Support_Tickets_Client">
+    <End Role="tblClient" Type="Self.tblClient" Multiplicity="0..1" />
+    <End Role="tblSupport_Tickets" Type="Self.tblSupport_Tickets" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblClient">
+        <PropertyRef Name="id_client" />
+      </Principal>
+      <Dependent Role="tblSupport_Tickets">
+        <PropertyRef Name="id_client" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblSupport_Tickets_tblUser">
+    <End Role="tblUser" Type="Self.tblUser" Multiplicity="0..1" />
+    <End Role="tblSupport_Tickets" Type="Self.tblSupport_Tickets" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUser">
+        <PropertyRef Name="id_user" />
+      </Principal>
+      <Dependent Role="tblSupport_Tickets">
+        <PropertyRef Name="id_user" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblUser">
+    <End Role="tblUser" Type="Self.tblUser" Multiplicity="0..1" />
+    <End Role="tblReunion" Type="Self.tblReunion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUser">
+        <PropertyRef Name="id_user" />
+      </Principal>
+      <Dependent Role="tblReunion">
+        <PropertyRef Name="id_user" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="CMDModelStoreContainer">
+    <EntitySet Name="tblClient" EntityType="Self.tblClient" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblContact" EntityType="Self.tblContact" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblReunion" EntityType="Self.tblReunion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblSupport_Tickets" EntityType="Self.tblSupport_Tickets" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblUser" EntityType="Self.tblUser" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Contact_Client" Association="Self.FK_Contact_Client">
+      <End Role="tblClient" EntitySet="tblClient" />
+      <End Role="tblContact" EntitySet="tblContact" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Reunion_Client" Association="Self.FK_Reunion_Client">
+      <End Role="tblClient" EntitySet="tblClient" />
+      <End Role="tblReunion" EntitySet="tblReunion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Reunion_Reunion" Association="Self.FK_Reunion_Reunion">
+      <End Role="tblReunion" EntitySet="tblReunion" />
+      <End Role="tblReunion1" EntitySet="tblReunion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Support_Tickets_Client" Association="Self.FK_Support_Tickets_Client">
+      <End Role="tblClient" EntitySet="tblClient" />
+      <End Role="tblSupport_Tickets" EntitySet="tblSupport_Tickets" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblSupport_Tickets_tblUser" Association="Self.FK_tblSupport_Tickets_tblUser">
+      <End Role="tblUser" EntitySet="tblUser" />
+      <End Role="tblSupport_Tickets" EntitySet="tblSupport_Tickets" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblUser" Association="Self.FK_tblUser">
+      <End Role="tblUser" EntitySet="tblUser" />
+      <End Role="tblReunion" EntitySet="tblReunion" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

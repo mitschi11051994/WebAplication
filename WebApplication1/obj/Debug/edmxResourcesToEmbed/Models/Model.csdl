@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CMDModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="tblClient">
+    <Key>
+      <PropertyRef Name="id_client" />
+    </Key>
+    <Property Name="id_client" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="web_page" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="tel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="puesto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tblContact" Relationship="Self.FK_Contact_Client" FromRole="tblClient" ToRole="tblContact" />
+    <NavigationProperty Name="tblReunion" Relationship="Self.FK_Reunion_Client" FromRole="tblClient" ToRole="tblReunion" />
+    <NavigationProperty Name="tblSupport_Tickets" Relationship="Self.FK_Support_Tickets_Client" FromRole="tblClient" ToRole="tblSupport_Tickets" />
+  </EntityType>
+  <EntityType Name="tblContact">
+    <Key>
+      <PropertyRef Name="id_contact" />
+    </Key>
+    <Property Name="id_contact" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="id_client" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="first_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="web_address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="tel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="puesto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tblClient" Relationship="Self.FK_Contact_Client" FromRole="tblContact" ToRole="tblClient" />
+  </EntityType>
+  <EntityType Name="tblReunion">
+    <Key>
+      <PropertyRef Name="id_reunion" />
+    </Key>
+    <Property Name="id_reunion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="fecha_y_hora" Type="DateTime" Precision="3" />
+    <Property Name="id_user" Type="Int16" />
+    <Property Name="esVirtual" Type="Boolean" />
+    <Property Name="id_client" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tblClient" Relationship="Self.FK_Reunion_Client" FromRole="tblReunion" ToRole="tblClient" />
+    <NavigationProperty Name="tblReunion1" Relationship="Self.FK_Reunion_Reunion" FromRole="tblReunion" ToRole="tblReunion1" />
+    <NavigationProperty Name="tblReunion2" Relationship="Self.FK_Reunion_Reunion" FromRole="tblReunion1" ToRole="tblReunion" />
+    <NavigationProperty Name="tblUser" Relationship="Self.FK_tblUser" FromRole="tblReunion" ToRole="tblUser" />
+  </EntityType>
+  <EntityType Name="tblSupport_Tickets">
+    <Key>
+      <PropertyRef Name="id_Support_Tickets" />
+    </Key>
+    <Property Name="id_Support_Tickets" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="detalle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="id_user" Type="Int16" />
+    <Property Name="id_client" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tblClient" Relationship="Self.FK_Support_Tickets_Client" FromRole="tblSupport_Tickets" ToRole="tblClient" />
+    <NavigationProperty Name="tblUser" Relationship="Self.FK_tblSupport_Tickets_tblUser" FromRole="tblSupport_Tickets" ToRole="tblUser" />
+  </EntityType>
+  <EntityType Name="tblUser">
+    <Key>
+      <PropertyRef Name="id_user" />
+    </Key>
+    <Property Name="id_user" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Username" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Role" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tblReunion" Relationship="Self.FK_tblUser" FromRole="tblUser" ToRole="tblReunion" />
+    <NavigationProperty Name="tblSupport_Tickets" Relationship="Self.FK_tblSupport_Tickets_tblUser" FromRole="tblUser" ToRole="tblSupport_Tickets" />
+  </EntityType>
+  <Association Name="FK_Contact_Client">
+    <End Role="tblClient" Type="Self.tblClient" Multiplicity="0..1" />
+    <End Role="tblContact" Type="Self.tblContact" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblClient">
+        <PropertyRef Name="id_client" />
+      </Principal>
+      <Dependent Role="tblContact">
+        <PropertyRef Name="id_client" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Reunion_Client">
+    <End Role="tblClient" Type="Self.tblClient" Multiplicity="0..1" />
+    <End Role="tblReunion" Type="Self.tblReunion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblClient">
+        <PropertyRef Name="id_client" />
+      </Principal>
+      <Dependent Role="tblReunion">
+        <PropertyRef Name="id_client" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Support_Tickets_Client">
+    <End Role="tblClient" Type="Self.tblClient" Multiplicity="0..1" />
+    <End Role="tblSupport_Tickets" Type="Self.tblSupport_Tickets" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblClient">
+        <PropertyRef Name="id_client" />
+      </Principal>
+      <Dependent Role="tblSupport_Tickets">
+        <PropertyRef Name="id_client" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Reunion_Reunion">
+    <End Role="tblReunion" Type="Self.tblReunion" Multiplicity="1" />
+    <End Role="tblReunion1" Type="Self.tblReunion" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="tblReunion">
+        <PropertyRef Name="id_reunion" />
+      </Principal>
+      <Dependent Role="tblReunion1">
+        <PropertyRef Name="id_reunion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblUser">
+    <End Role="tblUser" Type="Self.tblUser" Multiplicity="0..1" />
+    <End Role="tblReunion" Type="Self.tblReunion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUser">
+        <PropertyRef Name="id_user" />
+      </Principal>
+      <Dependent Role="tblReunion">
+        <PropertyRef Name="id_user" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblSupport_Tickets_tblUser">
+    <End Role="tblUser" Type="Self.tblUser" Multiplicity="0..1" />
+    <End Role="tblSupport_Tickets" Type="Self.tblSupport_Tickets" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUser">
+        <PropertyRef Name="id_user" />
+      </Principal>
+      <Dependent Role="tblSupport_Tickets">
+        <PropertyRef Name="id_user" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="CMDEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tblClient" EntityType="Self.tblClient" />
+    <EntitySet Name="tblContact" EntityType="Self.tblContact" />
+    <EntitySet Name="tblReunion" EntityType="Self.tblReunion" />
+    <EntitySet Name="tblSupport_Tickets" EntityType="Self.tblSupport_Tickets" />
+    <EntitySet Name="tblUser" EntityType="Self.tblUser" />
+    <AssociationSet Name="FK_Contact_Client" Association="Self.FK_Contact_Client">
+      <End Role="tblClient" EntitySet="tblClient" />
+      <End Role="tblContact" EntitySet="tblContact" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Reunion_Client" Association="Self.FK_Reunion_Client">
+      <End Role="tblClient" EntitySet="tblClient" />
+      <End Role="tblReunion" EntitySet="tblReunion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Support_Tickets_Client" Association="Self.FK_Support_Tickets_Client">
+      <End Role="tblClient" EntitySet="tblClient" />
+      <End Role="tblSupport_Tickets" EntitySet="tblSupport_Tickets" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Reunion_Reunion" Association="Self.FK_Reunion_Reunion">
+      <End Role="tblReunion" EntitySet="tblReunion" />
+      <End Role="tblReunion1" EntitySet="tblReunion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblUser" Association="Self.FK_tblUser">
+      <End Role="tblUser" EntitySet="tblUser" />
+      <End Role="tblReunion" EntitySet="tblReunion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblSupport_Tickets_tblUser" Association="Self.FK_tblSupport_Tickets_tblUser">
+      <End Role="tblUser" EntitySet="tblUser" />
+      <End Role="tblSupport_Tickets" EntitySet="tblSupport_Tickets" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
