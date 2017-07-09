@@ -1,0 +1,84 @@
+﻿@using Microsoft.AspNet.Identity
+@model IEnumerable<WebApplication1.Models.tblLogin>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>ADMINISTRADOR</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        .titulo {
+            color: midnightblue;
+            font-family: 'Bookman Old Style';
+            font-size: 35px;
+            margin-left: 220PX;
+        }
+        input,
+        select,
+        textarea {
+            width: 420px;
+            height: auto;
+        }
+        .profile-img {
+            width: 235px;
+            height: 235px;
+            margin-left: 3em;
+            margin-top: 5px;
+            padding-top: -1em;
+            padding-bottom: -1em;
+            border-radius: 107px 107px 107px 107px;
+            -moz-border-radius: 107px 107px 107px 107px;
+            -webkit-border-radius: 107px 107px 107px 107px;
+            border: 11px solid #96d4c8;
+            
+        }
+
+        </style>
+
+</head>
+<body>
+
+@if (User.Identity.IsAuthenticated)
+{
+    <h2 class="titulo">BIENVENIDO ADMINISTRADOR: @(User.Identity.IsAuthenticated ? HttpContext.Current.User.Identity.Name : "Guest") </h2>
+    <a href="@Url.Action("SignOut","Home")">Logout</a>
+}
+
+
+<div class="container">
+
+    <div class="row">
+        <div class="panel panel-success" style="width:80em; height: 34.5em; margin-left: -0.1em; padding: 1em; padding-top: -1EM;  margin-top: 1em; ">
+
+            <div class="panel-body" style="width: 50em; margin-left: 0em; margin-top: 0em;  padding: 5px 10px;">                
+                <img class="profile-img" src="http://icon-icons.com/icons2/1146/PNG/512/1486485588-add-create-new-math-sign-cross-plus_81186.png" 
+                     style="">
+                <a href="@Url.Action("Usuarios","tblLogins/Index")">Usuarios</a>                
+                <img/>
+
+
+
+            </div>
+          </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+
+
+
+
