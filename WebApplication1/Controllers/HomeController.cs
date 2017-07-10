@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -11,12 +12,13 @@ namespace WebApplication1.Controllers
 {
     public class HomeController : Controller
     {
-
+        CMDEntities d = new CMDEntities();
         public ActionResult Index()
         {
             return View();
         }
 
+        
         public ActionResult IndexUser()
         {
             return View();
