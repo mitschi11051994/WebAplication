@@ -18,7 +18,8 @@ namespace WebApplication1.Models
         public int id_reunion { get; set; }
         [Required]
         public string title { get; set; }
-        [Required]
+
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
         public Nullable<System.DateTime> fecha_y_hora { get; set; }
         [Required]
         public int id_user { get; set; }
