@@ -19,7 +19,8 @@ namespace WebApplication1.Models
         [Required]
         public string title { get; set; }
 
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> fecha_y_hora { get; set; }
         [Required]
         public int id_user { get; set; }

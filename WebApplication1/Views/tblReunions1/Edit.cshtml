@@ -23,9 +23,10 @@
 
         input,
         select,
-        textarea {
-            width: 420px;
-            height: auto;
+        textarea, label {
+            width: 200px;
+            height: 30px;
+            position: center;
         }
     </style>
 
@@ -66,8 +67,8 @@
 
                                 <div class="form-group">
                                     @Html.LabelFor(model => model.fecha_y_hora, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    @Html.TextBoxFor(m => m.fecha_y_hora, "{0:MM/dd/yyyy}", new { @class = "control-label col-md-2", type = "date" })
                                     <div class="col-md-10">
-                                        @Html.EditorFor(model => model.fecha_y_hora)
                                         @Html.ValidationMessageFor(model => model.fecha_y_hora)
                                     </div>
                                 </div>
@@ -79,20 +80,21 @@
                                         @Html.ValidationMessageFor(model => model.id_user)
                                     </div>
                                 </div>
-
-                                <div class="form-group">
-                                    @Html.LabelFor(model => model.esVirtual, htmlAttributes: new { @class = "control-label col-md-2" })
-                                    <div class="col-md-10">
-                                        @Html.EditorFor(model => model.esVirtual)
-                                        @Html.ValidationMessageFor(model => model.esVirtual)
-                                    </div>
-                                </div>
+                                
 
                                 <div class="form-group">
                                     @Html.LabelFor(model => model.id_client, htmlAttributes: new { @class = "control-label col-md-2" })
                                     <div class="col-md-10">
                                         @Html.EditorFor(model => model.id_client)
                                         @Html.ValidationMessageFor(model => model.id_client)
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.esVirtual, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.esVirtual)
+                                        @Html.ValidationMessageFor(model => model.esVirtual)
                                     </div>
                                 </div>
 
