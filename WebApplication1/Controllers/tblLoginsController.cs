@@ -50,6 +50,7 @@ namespace WebApplication1.Controllers
         {
             if (ModelState.IsValid)
             {
+
                 db.tblLogin.Add(tblLogin);
                 db.SaveChanges();
                 return RedirectToAction("Index");
