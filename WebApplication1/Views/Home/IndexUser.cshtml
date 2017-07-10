@@ -49,8 +49,8 @@
     @if (User.Identity.IsAuthenticated)
     {
         <h2 class="titulo">BIENVENDIO USUARIO: @(User.Identity.IsAuthenticated ? HttpContext.Current.User.Identity.Name : "Guest") </h2>
-        <a href="@Url.Action("SignOut","Home")">Logout</a>
-    }
+        <a href="@Url.Action("SignOut", "Home")">Logout</a>
+
 
 
 
@@ -63,10 +63,10 @@
                     <div id="apDiv1">
                         <table  border="0">
                             <tr>
-                                <td><img class="profile-img" src="https://images.vexels.com/media/users/3/135247/isolated/preview/e70a6296c2a79dc7a56ab05b103f38e8-signo-del-usuario-con-el-fondo-by-vexels.png" align="left" /><a href="@Url.Action("Clientes","tblClients/Index")">Clientes</a></td>
-                                <td><img class="profile-img" src="http://simplework.es/wp-content/uploads/2016/12/salasdereunion.png" align="left" /> <a href="@Url.Action("Reuniones","tblReunions1/Index")">Reuniones</a></td>
+                                <td><img class="profile-img" src="https://images.vexels.com/media/users/3/135247/isolated/preview/e70a6296c2a79dc7a56ab05b103f38e8-signo-del-usuario-con-el-fondo-by-vexels.png" align="left" /><a href="@Url.Action("Clientes", "tblClients/Index")">Clientes</a></td>
+                                <td><img class="profile-img" src="http://simplework.es/wp-content/uploads/2016/12/salasdereunion.png" align="left" /> <a href="@Url.Action("Reuniones", "tblReunions1/Index")">Reuniones</a></td>
                                 <td><img class="profile-img"  src="http://alfarored.com/templates/alfarored/images/contacto.png" align="left" /> <a href="@Url.Action("Contactos", "tblContact/Index")" />Contactos</td>
-                                <td><img class="profile-img"  src="https://www.apspayroll.com/wp-content/blog-images/checklist-icon-350.png" align="left" /> <a href="@Url.Action("Soporte_Tiquetes","tblSupport_Tickets/Index")" />Tiquetes Soporte</td>
+                                <td><img class="profile-img"  src="https://www.apspayroll.com/wp-content/blog-images/checklist-icon-350.png" align="left" /> <a href="@Url.Action("Soporte_Tiquetes", "tblSupport_Tickets/Index")" />Tiquetes Soporte</td>
                             </tr>
                         </table>
                     </div>
@@ -74,6 +74,10 @@
             </div>
         </div>
     </div>
+    }
+    <h1>Intento de Acceso Incorrecto</h1>
+    <h2> Autentícate Primero</h2>
+    <a href="@Url.Action("Login", "Home")">Página de Inicio</a>
 </body>
 </html>
 

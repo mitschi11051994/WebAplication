@@ -35,8 +35,8 @@
     @if (User.Identity.IsAuthenticated)
     {
         <h2 class="titulo">BIENVENIDO USUARIO: @(User.Identity.IsAuthenticated ? HttpContext.Current.User.Identity.Name : "Guest") </h2>
-        <a href="@Url.Action("SignOut","Home")">Logout</a>
-    }
+        <a href="@Url.Action("SignOut", "Home")">Logout</a>
+
 
     <div class="container">
 
@@ -46,7 +46,7 @@
                 <div class="panel-body" style="width: 50em; margin-left: 0em; margin-top: 0em;  padding: 5px 10px;">
 
                     <div>
-                        <a href="@Url.Action("IndexUser","Home")">Regresar</a>
+                        <a href="@Url.Action("IndexUser", "Home")">Regresar</a>
                         <p>
                             @Html.ActionLink("Crear Nuevo Cliente", "Create")
                         </p>
@@ -111,6 +111,10 @@
             </div>
         </div>
     </div>
+    }
+    <h1>Intento de Acceso Incorrecto</h1>
+    <h2> Autentícate Primero</h2>
+    <a href="@Url.Action("Login", "Home")">Página de Inicio</a>
 </body>
 </html>
 
