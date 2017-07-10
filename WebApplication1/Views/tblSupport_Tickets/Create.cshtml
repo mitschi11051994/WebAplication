@@ -71,7 +71,7 @@
 
                                 <div class="form-group">
                                     @Html.LabelFor(model => model.id_user, htmlAttributes: new { @class = "control-label col-md-2" })
-                                    @Html.DropDownListFor(m => m.id_user, (SelectList)ViewBag.TipoUsuario, "Seleccione el Usuario");
+                                    @Html.DropDownListFor(m => m.id_user, (SelectList)ViewBag.TipoUsuario, "Seleccione el Usuario")
                                     <div class="col-md-10">
                                         @Html.ValidationMessageFor(model => model.id_user)
                                     </div>
@@ -79,7 +79,7 @@
 
                                 <div class="form-group">
                                     @Html.LabelFor(model => model.id_client, htmlAttributes: new { @class = "control-label col-md-2" })
-                                    @Html.DropDownListFor(m => m.id_client, (SelectList)ViewBag.TipoCliente, "Seleccione el Cliente");
+                                    @Html.DropDownListFor(m => m.id_client, (SelectList)ViewBag.TipoCliente, "Seleccione el Cliente")
                                     <div class="col-md-10">
                                         @Html.ValidationMessageFor(model => model.id_client)
                                     </div>
@@ -87,11 +87,22 @@
 
                                 <div class="form-group">
                                     @Html.LabelFor(model => model.estado, htmlAttributes: new { @class = "control-label col-md-2" })
-                                    <div class="col-md-10">
-                                        @Html.EditorFor(model => model.estado)
-                                        @Html.ValidationMessageFor(model => model.estado)
-                                    </div>
+
+                                    @{
+                                        List<SelectListItem> listItems = new List<SelectListItem>();
+                                        listItems.Add(new SelectListItem{ Text = "Abierto",Value = "Abierto" });
+                                        listItems.Add(new SelectListItem { Text = "En Espera", Value = "En Espera" });
+                                        listItems.Add(new SelectListItem { Text = "En Proceso", Value = "En Proceso" });
+                                        listItems.Add(new SelectListItem { Text = "En Espera", Value = "En Espera" });
+                                        @Html.DropDownListFor(model => model.estado, listItems)
+                                        <div class="col-md-10">
+                                            @Html.ValidationMessageFor(model => model.estado)
+                                        </div>
+
+                                    }
                                 </div>
+
+                                
 
                                 <div class="form-group">
                                     <div class="col-md-offset-2 col-md-10">
