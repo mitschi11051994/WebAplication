@@ -72,7 +72,8 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group m ">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Role, htmlAttributes: new { @class = "control-label col-md-2" })
 
                                     @{
                                         List<SelectListItem> listItems = new List<SelectListItem>();
@@ -88,11 +89,16 @@
                                             Selected = true
                                         });
 
-                                        <div class="combo">
-                                            @Html.DropDownListFor(model => model.Role, listItems)
+
+                                        @Html.DropDownListFor(model => model.Role, listItems)
+                                        <div class="col-md-10">
+                                            @Html.ValidationMessageFor(model => model.Role)
                                         </div>
+
                                     }
-                                </div> 
+                                </div>
+
+                                
 
                                 <div class="form-group">
                                     <div class="col-md-offset-2 col-md-10">
