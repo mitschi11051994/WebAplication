@@ -32,9 +32,10 @@
 </head>
 <body>
 
-    @if (User.Identity.IsAuthenticated)
-    {
-        <h2 class="titulo">BIENVENIDO ADMINISTRADOR: @(User.Identity.IsAuthenticated ? HttpContext.Current.User.Identity.Name : "Guest") </h2>
+
+@if (User.Identity.IsAuthenticated)
+{
+    <h2 class="titulo">BIENVENIDO ADMINISTRADOR: @(User.Identity.IsAuthenticated ? HttpContext.Current.User.Identity.Name : "Guest") </h2>
         <a href="@Url.Action("SignOut", "Home")">Logout</a>
 
 
@@ -93,9 +94,12 @@
             </div>
         </div>
     </div>
-    }
+}
+else
+{
     <h1>Intento de Acceso Incorrecto</h1>
     <h2> Autentícate Primero</h2>
     <a href="@Url.Action("Login", "Home")">Página de Inicio</a>
+}
 </body>
 </html>

@@ -119,9 +119,12 @@
         </div>
     </div>
     }
-    <h1>Intento de Acceso Incorrecto</h1>
-    <h2> Autentícate Primero</h2>
-    <a href="@Url.Action("Login", "Home")">Página de Inicio</a>
+    else
+    {
+        <h1>Intento de Acceso Incorrecto</h1>
+        <h2> Autentícate Primero</h2>
+        <a href="@Url.Action("Login", "Home")">Página de Inicio</a>
+    }
 </body>
 </html>
 

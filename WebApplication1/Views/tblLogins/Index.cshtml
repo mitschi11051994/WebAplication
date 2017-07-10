@@ -37,67 +37,71 @@
         <a href="@Url.Action("SignOut", "Home")">Logout</a>
 
 
-    <div class="container">
+        <div class="container">
 
-        <div class="row">
-            <div class="panel panel-success" style="width:80em; height: 34.5em; margin-left: -0.1em; padding: 1em; padding-top: -1EM;  margin-top: 1em; ">
+            <div class="row">
+                <div class="panel panel-success" style="width:80em; height: 34.5em; margin-left: -0.1em; padding: 1em; padding-top: -1EM;  margin-top: 1em; ">
 
-                <div class="panel-body" style="width: 50em; margin-left: 0em; margin-top: 0em;  padding: 5px 10px;">
+                    <div class="panel-body" style="width: 50em; margin-left: 0em; margin-top: 0em;  padding: 5px 10px;">
 
-                    <div>
-                        <a href="@Url.Action("IndexUser", "Home")">Regresar</a>
-                        <p>
-                            @Html.ActionLink("Crear Nuevo Usuario", "Create")
-                        </p>
-                        <table class="table">
-                            <tr>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Username)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Password)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Role)
-                                </th>
-                                <th></th>
-                            </tr>
-
-                            @foreach (var item in Model)
-                            {
+                        <div>
+                            <a href="@Url.Action("Index", "Home")">Regresar</a>
+                            <p>
+                                @Html.ActionLink("Crear Nuevo Usuario", "Create")
+                            </p>
+                            <table class="table">
                                 <tr>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Username)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Password)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Role)
-                                    </td>
-                                    <td>
-                                        @Html.ActionLink("Edit", "Edit", new { id = item.id_user }) |
-                                        @Html.ActionLink("Details", "Details", new { id = item.id_user }) |
-                                        @Html.ActionLink("Delete", "Delete", new { id = item.id_user })
-                                    </td>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Username)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Password)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Role)
+                                    </th>
+                                    <th></th>
                                 </tr>
+
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Username)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Password)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Role)
+                                        </td>
+                                        <td>
+                                            @Html.ActionLink("Edit", "Edit", new { id = item.id_user }) |
+                                            @Html.ActionLink("Details", "Details", new { id = item.id_user }) |
+                                            @Html.ActionLink("Delete", "Delete", new { id = item.id_user })
+                                        </td>
+                                    </tr>
+                                }
+
+                            </table>
+
+
+                            @section Scripts {
+                                @Scripts.Render("~/bundles/jqueryval")
                             }
-
-                        </table>
-
-
-                        @section Scripts {
-                            @Scripts.Render("~/bundles/jqueryval")
-                        }
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     }
-    <h1>Intento de Acceso Incorrecto</h1>
-    <h2> Autentícate Primero</h2>
-    <a href="@Url.Action("Login", "Home")">Página de Inicio</a>
+    else
+    {
+        <h1>Intento de Acceso Incorrecto</h1>
+        <h2> Autentícate Primero</h2>
+        <a href="@Url.Action("Login", "Home")">Página de Inicio</a>
+    }
+
 </body>
 </html>
 
