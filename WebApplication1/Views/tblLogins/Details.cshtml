@@ -8,7 +8,7 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>ADMINISTRADOR</title>
+    <title>USUARIO</title>
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
@@ -19,6 +19,7 @@
             font-size: 35px;
             margin-left: 220PX;
         }
+
         input,
         select,
         textarea {
@@ -28,13 +29,13 @@
     </style>
 
 </head>
-
 <body>
+
     @if (User.Identity.IsAuthenticated)
     {
-        <h2 class="titulo">BIENVENIDO ADMINISTRADOR: @(User.Identity.IsAuthenticated ? HttpContext.Current.User.Identity.Name : "Guest") </h2> <a href="@Url.Action("SignOut","Home")">Logout</a>
+        <h2 class="titulo">BIENVENIDO ADMINISTRADOR: @(User.Identity.IsAuthenticated ? HttpContext.Current.User.Identity.Name : "Guest") </h2>
+        <a href="@Url.Action("SignOut","Home")">Logout</a>
     }
-
 
     <div class="container">
 
@@ -46,8 +47,7 @@
                     <div>
 
                         <div>
-                            <h4>tblLogin</h4>
-                            <hr />
+
                             <dl class="dl-horizontal">
                                 <dt>
                                     @Html.DisplayNameFor(model => model.Username)
@@ -79,7 +79,6 @@
                             @Html.ActionLink("Edit", "Edit", new { id = Model.id_user }) |
                             @Html.ActionLink("Back to List", "Index")
                         </p>
-
                     </div>
                 </div>
             </div>
@@ -87,8 +86,3 @@
     </div>
 </body>
 </html>
-
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}

@@ -4,11 +4,12 @@
     ViewBag.Title = "Edit";
 }
 
+
 <!doctype html>
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>ADMINISTRADOR</title>
+    <title>USUARIO</title>
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
@@ -19,6 +20,7 @@
             font-size: 35px;
             margin-left: 220PX;
         }
+
         input,
         select,
         textarea {
@@ -28,13 +30,13 @@
     </style>
 
 </head>
-
 <body>
+
     @if (User.Identity.IsAuthenticated)
     {
-        <h2 class="titulo">BIENVENIDO ADMINISTRADOR: @(User.Identity.IsAuthenticated ? HttpContext.Current.User.Identity.Name : "Guest") </h2> <a href="@Url.Action("SignOut","Home")">Logout</a>
+        <h2 class="titulo">BIENVENIDO ADMINISTRADOR: @(User.Identity.IsAuthenticated ? HttpContext.Current.User.Identity.Name : "Guest") </h2>
+        <a href="@Url.Action("SignOut","Home")">Logout</a>
     }
-
 
     <div class="container">
 
@@ -45,14 +47,12 @@
 
                     <div>
 
-
                         @using (Html.BeginForm())
                         {
                             @Html.AntiForgeryToken()
 
                             <div class="form-horizontal">
-                                <h4>tblLogin</h4>
-                                <hr />
+
                                 @Html.ValidationSummary(true)
                                 @Html.HiddenFor(model => model.id_user)
 
@@ -74,31 +74,11 @@
 
                                 <div class="form-group">
                                     @Html.LabelFor(model => model.Role, htmlAttributes: new { @class = "control-label col-md-2" })
-
-                                    @{
-                                        List<SelectListItem> listItems = new List<SelectListItem>();
-                                        listItems.Add(new SelectListItem
-                                        {
-                                            Text = "Admin",
-                                            Value = "Admin"
-                                        });
-                                        listItems.Add(new SelectListItem
-                                        {
-                                            Text = "User",
-                                            Value = "User",
-                                            Selected = true
-                                        });
-
-
-                                        @Html.DropDownListFor(model => model.Role, listItems)
-                                        <div class="col-md-10">
-                                            @Html.ValidationMessageFor(model => model.Role)
-                                        </div>
-
-                                    }
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.Role)
+                                        @Html.ValidationMessageFor(model => model.Role)
+                                    </div>
                                 </div>
-
-                                
 
                                 <div class="form-group">
                                     <div class="col-md-offset-2 col-md-10">
@@ -112,6 +92,9 @@
                             @Html.ActionLink("Back to List", "Index")
                         </div>
 
+                        @section Scripts {
+                            @Scripts.Render("~/bundles/jqueryval")
+                        }
                     </div>
                 </div>
             </div>
@@ -119,8 +102,3 @@
     </div>
 </body>
 </html>
-
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}

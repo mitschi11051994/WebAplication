@@ -21,7 +21,7 @@ namespace WebApplication1.Controllers
         }
 
         // GET: tblLogins/Details/5
-        public ActionResult Details(short? id)
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
@@ -46,7 +46,7 @@ namespace WebApplication1.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Username,Password,Role")] tblLogin tblLogin)
+        public ActionResult Create([Bind(Include = "id_user,Username,Password,Role")] tblLogin tblLogin)
         {
             if (ModelState.IsValid)
             {
@@ -59,7 +59,7 @@ namespace WebApplication1.Controllers
         }
 
         // GET: tblLogins/Edit/5
-        public ActionResult Edit(short? id)
+        public ActionResult Edit(int? id)
         {
             if (id == null)
             {
@@ -78,7 +78,7 @@ namespace WebApplication1.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Username,Password,Role")] tblLogin tblLogin)
+        public ActionResult Edit([Bind(Include = "id_user,Username,Password,Role")] tblLogin tblLogin)
         {
             if (ModelState.IsValid)
             {
@@ -90,7 +90,7 @@ namespace WebApplication1.Controllers
         }
 
         // GET: tblLogins/Delete/5
-        public ActionResult Delete(short? id)
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {
@@ -107,7 +107,7 @@ namespace WebApplication1.Controllers
         // POST: tblLogins/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(short id)
+        public ActionResult DeleteConfirmed(int id)
         {
             tblLogin tblLogin = db.tblLogin.Find(id);
             db.tblLogin.Remove(tblLogin);
