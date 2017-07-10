@@ -35,8 +35,8 @@
     @if (User.Identity.IsAuthenticated)
     {
         <h2 class="titulo">BIENVENIDO USUARIO: @(User.Identity.IsAuthenticated ? HttpContext.Current.User.Identity.Name : "Guest") </h2>
-        <a href="@Url.Action("SignOut","Home")">Logout</a>
-    }
+        <a href="@Url.Action("SignOut", "Home")">Logout</a>
+
 
     <div class="container">
 
@@ -90,7 +90,7 @@
                                     @Html.LabelFor(model => model.estado, htmlAttributes: new { @class = "control-label col-md-2" })
                                     @{
                                         List<SelectListItem> listItems = new List<SelectListItem>();
-                                        listItems.Add(new SelectListItem{ Text = "Abierto",Value = "Abierto" });
+                                        listItems.Add(new SelectListItem { Text = "Abierto", Value = "Abierto" });
                                         listItems.Add(new SelectListItem { Text = "En Espera", Value = "En Espera" });
                                         listItems.Add(new SelectListItem { Text = "En Proceso", Value = "En Proceso" });
                                         listItems.Add(new SelectListItem { Text = "En Espera", Value = "En Espera" });
@@ -123,5 +123,9 @@
             </div>
         </div>
     </div>
+    }
+    <h1>Intento de Acceso Incorrecto</h1>
+    <h2> Autentícate Primero</h2>
+    <a href="@Url.Action("Login", "Home")">Página de Inicio</a>
 </body>
 </html>
