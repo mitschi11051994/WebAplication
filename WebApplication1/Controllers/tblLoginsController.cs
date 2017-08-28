@@ -46,7 +46,7 @@ namespace WebApplication1.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Username,Password,Role")] tblLogin tblLogin)
+        public ActionResult Create([Bind(Include = "Username,Md5(Password),Role")] tblLogin tblLogin)
         {
             if (ModelState.IsValid)
             {
@@ -79,7 +79,7 @@ namespace WebApplication1.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id_user,Username,Password,Role")] tblLogin tblLogin)
+        public ActionResult Edit([Bind(Include = "id_user,Username,Md5(Password),Role")] tblLogin tblLogin)
         {
             if (ModelState.IsValid)
             {

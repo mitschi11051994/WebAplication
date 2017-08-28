@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using WebApplication1.Models;
+using System.Security.Cryptography;
 
 namespace WebApplication1.Controllers
 {
@@ -28,11 +29,29 @@ namespace WebApplication1.Controllers
         {
             return View();
         }
+        public string Encript(string password)
+        {
+            string result = string.Empty;
+            byte[] encryted = System.Text.Encoding.Unicode.GetBytes(password);
+            result = Convert.ToBase64String(encryted);
+            return result;
+        }
+
+        /// Esta función desencripta la cadena que le envíamos en el parámentro de entrada.
+        public string Desencript(string password)
+        {
+            string result = string.Empty;
+            byte[] decryted = Convert.FromBase64String(password);
+            //result = System.Text.Encoding.Unicode.GetString(decryted, 0, decryted.ToArray().Length);
+            result = System.Text.Encoding.Unicode.GetString(decryted);
+            return result;
+        }
+
         [HttpPost]
         public ActionResult Login(tblLogin model,string returnUrl)
         {
             CMDEntities db = new CMDEntities();
-            var dataItem = db.tblLogin.Where(x => x.Username == model.Username && x.Password == model.Password).FirstOrDefault();
+            var dataItem = db.tblLogin.Where(x => x.Username == model.Username && Encript(x.Password) == model.Password).FirstOrDefault();
             if (dataItem != null)
             {
                 FormsAuthentication.SetAuthCookie(dataItem.Username, false);
@@ -44,7 +63,7 @@ namespace WebApplication1.Controllers
                 else
                 {
                     tblLogin login = db.tblLogin.FirstOrDefault(
-                        x => x.Username == model.Username && x.Password == model.Password);
+                        x => x.Username == model.Username && Encript(x.Password) == model.Password);
                     var datos = login.Role;
                     if (datos.Length > 0)
                     {
