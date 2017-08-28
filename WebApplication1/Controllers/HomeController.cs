@@ -51,7 +51,7 @@ namespace WebApplication1.Controllers
         public ActionResult Login(tblLogin model,string returnUrl)
         {
             CMDEntities db = new CMDEntities();
-            var dataItem = db.tblLogin.Where(x => x.Username == model.Username && Encript(x.Password) == model.Password).FirstOrDefault();
+            var dataItem = db.tblLogin.Where(x => x.Username == model.Username && (x.Password) == model.Password).FirstOrDefault();
             if (dataItem != null)
             {
                 FormsAuthentication.SetAuthCookie(dataItem.Username, false);
@@ -63,7 +63,7 @@ namespace WebApplication1.Controllers
                 else
                 {
                     tblLogin login = db.tblLogin.FirstOrDefault(
-                        x => x.Username == model.Username && Encript(x.Password) == model.Password);
+                        x => x.Username == model.Username && (x.Password) == model.Password);
                     var datos = login.Role;
                     if (datos.Length > 0)
                     {
